@@ -1,0 +1,59 @@
+﻿@page "/feedback"
+
+@inherits FluxorComponent
+
+<h3>User Feedback</h3>
+
+@if (UserFeedbackState.Value.Submitting)
+{
+    <div>
+        Submitting... Please wait.
+    </div>
+}
+else if (UserFeedbackState.Value.Submitted && string.IsNullOrWhiteSpace(UserFeedbackState.Value.ErrorMessage))
+{
+    <div class="alert alert-success">
+        Thank you for sharing!
+    </div>
+    <button onclick="@HandleReset">Ok</button>
+}
+else
+{
+    <EditForm Model="@Model" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+
+        <div class="form-group">
+            <label for="emailAddress">Email Address</label>
+            <InputText class="form-control" id="emailAddress" @bind-Value="Model.EmailAddress" type="email" />
+        </div>
+
+        <div class="form-group">
+            <label for="rating">Rating (1-10)</label>
+            <InputSelect class="form-control" id="rating" @bind-Value="Model.Rating">
+                @for (int i = 1; i <= 10; i++)
+                {
+                    <option>@i</option>
+                }
+            </InputSelect>
+        </div>
+
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <InputTextArea class="form-control" id="comment" @bind-Value="Model.Comment" rows="3"></InputTextArea>
+        </div>
+        <br />
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <ValidationSummary />
+    </EditForm>
+}
+
+@if (!string.IsNullOrWhiteSpace(UserFeedbackState.Value.ErrorMessage))
+{
+    <br />
+    <div class="alert alert-danger">
+        <span>Error: @UserFeedbackState.Value.ErrorMessage</span>
+        <br />
+        <button onclick="@HandleReset">Ok</button>
+    </div>
+}
