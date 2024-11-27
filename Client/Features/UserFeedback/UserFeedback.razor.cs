@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace FluxorBlazor.Client.Features.UserFeedback;
 
-public partial class Feedback : FluxorComponent
+public partial class UserFeedback : FluxorComponent
 {
     [Inject]
     protected IState<UserFeedbackState> UserFeedbackState { get; set; }
