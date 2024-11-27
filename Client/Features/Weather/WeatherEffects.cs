@@ -24,7 +24,7 @@ public class WeatherEffects
     }
 
     [EffectMethod(typeof(CounterIncrementAction))]
-    public void LoadForecastsOnIncrement(IDispatcher dispatcher)
+    public async Task LoadForecastsOnIncrement(IDispatcher dispatcher)
     {
         if (CounterState.Value.CurrentCount % 10 == 0)
         {
