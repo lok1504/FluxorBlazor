@@ -3,18 +3,12 @@ using System.Net.Http.Json;
 
 namespace FluxorBlazor.Client.Features.UserFeedback;
 
-public class UserFeedbackEffects
+public class UserFeedbackEffects(HttpClient httpClient)
 {
-    private readonly HttpClient _httpClient;
-    public UserFeedbackEffects(HttpClient httpClient)
-    {
-        _httpClient = httpClient;
-    }
-
     [EffectMethod]
     public async Task SubmitUserFeedback(UserFeedbackSubmitAction action, IDispatcher dispatcher)
     {
-        var response = await _httpClient.PostAsJsonAsync("Feedback", action.UserFeedbackModel);
+        var response = await httpClient.PostAsJsonAsync("Feedback", action.UserFeedbackModel);
 
         if (response.IsSuccessStatusCode)
         {
