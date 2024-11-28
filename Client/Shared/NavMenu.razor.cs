@@ -1,5 +1,4 @@
-﻿using Blazored.Toast.Services;
-using Fluxor;
+﻿using Fluxor;
 using Fluxor.Blazor.Web.Components;
 using FluxorBlazor.Client.Features.Counter;
 using FluxorBlazor.Client.Features.Weather;
